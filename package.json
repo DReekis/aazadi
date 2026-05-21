@@ -1,0 +1,22 @@
+{
+  "name": "aazadi",
+  "private": true,
+  "version": "0.1.0",
+  "description": "AAZADI constitutional civic journalism platform",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w @aazadi/web",
+    "build:web": "npm run build -w @aazadi/web",
+    "start:web": "npm run start -w @aazadi/web",
+    "typecheck:web": "npm run typecheck -w @aazadi/web"
+  },
+  "overrides": {
+    "postcss": "8.5.15"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=9.0.0"
+  }
+}

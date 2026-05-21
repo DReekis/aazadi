@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #11100f;
+  --color-maroon: #5a1723;
+  --color-maroon-ink: #3b0e16;
+  --color-peach: #e7ad95;
+  --color-peach-soft: #f4d7c8;
+  --color-paper: #f7f0e4;
+  --color-paper-deep: #eee1cf;
+  --color-cream: #fffaf0;
+  --color-ink: #1b1715;
+  --color-muted: #6b5f57;
+  --color-line: #d8c9b8;
+  --font-serif: "Source Serif 4", "Iowan Old Style", "Georgia", serif;
+  --font-sans: "Inter", "Aptos", "Segoe UI", system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+  --radius-card: 8px;
+  --shadow-editorial: 0 14px 40px rgb(17 16 15 / 8%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #f7f0e4;
+}
+
+body {
+  margin: 0;
+  background:
+    linear-gradient(90deg, rgb(90 23 35 / 0.035) 1px, transparent 1px),
+    linear-gradient(#f8f1e6, #f7f0e4);
+  background-size: 96px 96px, auto;
+  color: #1b1715;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: #e7ad95;
+  color: #11100f;
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.container-page {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.editorial-rule {
+  border-top: 1px solid rgb(90 23 35 / 0.24);
+}
+
+.eyebrow {
+  color: #5a1723;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+}
+
+.focus-ring:focus-visible {
+  outline-color: #5a1723;
+}
+
+.story-body p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.08rem, 1rem + 0.35vw, 1.34rem);
+  line-height: 1.78;
+  margin: 0 0 1.45rem;
+}
+
+.story-body p:first-child::first-letter {
+  color: #5a1723;
+  float: left;
+  font-size: 4.6rem;
+  font-weight: 800;
+  line-height: 0.84;
+  padding: 0.14rem 0.5rem 0 0;
+}
+
+.soft-card {
+  background: rgb(255 250 240 / 0.72);
+  border: 1px solid rgb(90 23 35 / 0.15);
+  border-radius: var(--radius-card);
+}
+
+.obsidian-panel {
+  background: #11100f;
+  color: #fffaf0;
+  border: 1px solid rgb(231 173 149 / 0.22);
+}
+
+.button-primary {
+  align-items: center;
+  background: #5a1723;
+  border: 1px solid #5a1723;
+  border-radius: 6px;
+  color: #fffaf0;
+  display: inline-flex;
+  font-size: 0.92rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.68rem 1rem;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.button-primary:hover {
+  background: #3b0e16;
+}
+
+.button-secondary {
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgb(90 23 35 / 0.32);
+  border-radius: 6px;
+  color: #3b0e16;
+  display: inline-flex;
+  font-size: 0.92rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.68rem 1rem;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.button-secondary:hover {
+  background: rgb(90 23 35 / 0.06);
+  border-color: rgb(90 23 35 / 0.52);
+}
+
+.section-band {
+  padding-block: clamp(2.25rem, 5vw, 4.75rem);
+}
+
+@media (max-width: 760px) {
+  .container-page {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .story-body p:first-child::first-letter {
+    font-size: 3.6rem;
+  }
+}
