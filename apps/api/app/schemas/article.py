@@ -3,7 +3,15 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field
 
-from app.models.enums import ArticleStatus, VerificationState
+from app.models.enums import (
+  ArticleStatus,
+  ContentDepth,
+  EditorialVerificationState,
+  GeographicScope,
+  TopicCategory,
+  Urgency,
+  VerificationState,
+)
 
 
 class ArticleCreate(BaseModel):
@@ -11,6 +19,15 @@ class ArticleCreate(BaseModel):
   subtitle: str = Field(min_length=12, max_length=420)
   category: str = Field(min_length=2, max_length=120)
   region: str = Field(min_length=2, max_length=120)
+  geographic_scope: GeographicScope
+  topic_category: TopicCategory
+  content_depth: ContentDepth
+  urgency: Urgency
+  editorial_verification_state: EditorialVerificationState
+  civic_issue: str = Field(min_length=2, max_length=180)
+  district: str | None = Field(default=None, max_length=160)
+  latitude: str | None = None
+  longitude: str | None = None
   author_id: UUID
   body_markdown: str = Field(min_length=80)
 
@@ -20,6 +37,15 @@ class ArticleUpdate(BaseModel):
   subtitle: str | None = Field(default=None, min_length=12, max_length=420)
   category: str | None = None
   region: str | None = None
+  geographic_scope: GeographicScope | None = None
+  topic_category: TopicCategory | None = None
+  content_depth: ContentDepth | None = None
+  urgency: Urgency | None = None
+  editorial_verification_state: EditorialVerificationState | None = None
+  civic_issue: str | None = Field(default=None, max_length=180)
+  district: str | None = Field(default=None, max_length=160)
+  latitude: str | None = None
+  longitude: str | None = None
   body_markdown: str | None = Field(default=None, min_length=80)
   diff_summary: str = Field(min_length=12, max_length=1000)
 
@@ -31,6 +57,15 @@ class ArticleRead(BaseModel):
   subtitle: str
   category: str
   region: str
+  geographic_scope: GeographicScope
+  topic_category: TopicCategory
+  content_depth: ContentDepth
+  urgency: Urgency
+  editorial_verification_state: EditorialVerificationState
+  civic_issue: str
+  district: str | None
+  latitude: str | None
+  longitude: str | None
   status: ArticleStatus
   verification_status: VerificationState
   reading_minutes: int

@@ -2,11 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, FileSearch, History, Landmark, Scale, ShieldCheck } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
+import { CivicMapPanel } from "@/components/civic-map-panel";
 import { CorrectionCard } from "@/components/correction-card";
 import { GovernanceCard } from "@/components/governance-card";
 import { JournalistCard } from "@/components/journalist-card";
+import { PublicPulse } from "@/components/public-pulse";
 import { SectionHeading } from "@/components/section-heading";
-import { articles, corrections, governanceLogs, journalists } from "@/lib/data";
+import { articles, civicMapRegions, corrections, governanceLogs, journalists, publicPulseItems } from "@/lib/data";
 import { formatDate, slugify } from "@/lib/format";
 
 export default function HomePage() {
@@ -66,6 +68,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <div id="public-pulse">
+        <PublicPulse items={publicPulseItems} />
+      </div>
 
       <section className="section-band">
         <div className="container-page">
@@ -132,6 +138,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <CivicMapPanel regions={civicMapRegions} />
 
       <section className="section-band bg-paper-deep/65">
         <div className="container-page grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">

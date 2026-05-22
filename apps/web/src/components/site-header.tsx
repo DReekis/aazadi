@@ -3,6 +3,8 @@ import { FileSearch, Landmark } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 const navItems = [
+  { href: "/#public-pulse", label: "Public Pulse" },
+  { href: "/civic-map", label: "Civic Map" },
   { href: "/search", label: "Search" },
   { href: "/governance", label: "Governance" },
   { href: "/corrections", label: "Corrections" },
@@ -27,9 +29,9 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Link className="button-secondary hidden sm:inline-flex" href="/dashboard">
+          <Link className="button-secondary hidden sm:inline-flex" href="/newsroom">
             <Landmark size={17} aria-hidden="true" />
-            Dashboard
+            The Newsroom
           </Link>
           <Link className="button-primary" href="/articles/audit-trail-missing-school-meals">
             <FileSearch size={17} aria-hidden="true" />

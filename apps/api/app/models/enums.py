@@ -31,6 +31,57 @@ class VerificationState(StrEnum):
   rejected = "rejected"
 
 
+class GeographicScope(StrEnum):
+  world = "world"
+  india = "india"
+  state = "state"
+  city = "city"
+
+
+class TopicCategory(StrEnum):
+  governance = "governance"
+  judiciary = "judiciary"
+  education = "education"
+  environment = "environment"
+  economy = "economy"
+  infrastructure = "infrastructure"
+  corruption = "corruption"
+  elections = "elections"
+  health = "health"
+  public_welfare = "public_welfare"
+
+
+class ContentDepth(StrEnum):
+  pulse_update = "pulse_update"
+  standard_report = "standard_report"
+  investigation = "investigation"
+  evidence_archive = "evidence_archive"
+
+
+class Urgency(StrEnum):
+  breaking = "breaking"
+  developing = "developing"
+  ongoing = "ongoing"
+  archived = "archived"
+
+
+class EditorialVerificationState(StrEnum):
+  preliminary = "preliminary"
+  reviewed = "reviewed"
+  verified = "verified"
+  disputed = "disputed"
+
+
+class WorkflowStatus(StrEnum):
+  draft = "draft"
+  review = "review"
+  evidence_verification = "evidence_verification"
+  editorial_approval = "editorial_approval"
+  publish = "publish"
+  corrections_layer = "corrections_layer"
+  archive = "archive"
+
+
 class EvidenceType(StrEnum):
   image = "image"
   pdf = "pdf"

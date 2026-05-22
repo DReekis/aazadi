@@ -1,4 +1,15 @@
-import type { Article, Correction, GovernanceLog, Journalist } from "@/types/domain";
+import type {
+  Article,
+  CivicMapRegion,
+  Correction,
+  EvidenceVaultRecord,
+  GovernanceLog,
+  GovernanceProposal,
+  InvestigationWorkspace,
+  Journalist,
+  PublicPulseItem,
+  RegionalDesk
+} from "@/types/domain";
 
 export const journalists: Journalist[] = [
   {
@@ -52,6 +63,14 @@ export const articles: Article[] = [
       "Tender records, payment ledgers, and kitchen inspections reveal how a basic public nutrition program became difficult to verify.",
     category: "Public Accountability",
     region: "Delhi NCR",
+    geographicScope: "City",
+    topicCategory: "Public Welfare",
+    contentDepth: "Investigation",
+    urgency: "Ongoing",
+    editorialVerificationState: "Reviewed",
+    civicIssue: "School nutrition procurement",
+    district: "Central Delhi",
+    coordinates: { lat: 28.6139, lng: 77.209 },
     author: naina,
     publishedAt: "2026-05-14T09:30:00+05:30",
     readingMinutes: 9,
@@ -164,6 +183,14 @@ export const articles: Article[] = [
       "Field photographs and tender annexures show repeated warnings before monsoon repairs were approved.",
     category: "Infrastructure",
     region: "Kerala",
+    geographicScope: "State",
+    topicCategory: "Infrastructure",
+    contentDepth: "Standard Report",
+    urgency: "Developing",
+    editorialVerificationState: "Verified",
+    civicIssue: "Coastal road safety",
+    district: "Ernakulam",
+    coordinates: { lat: 9.9312, lng: 76.2673 },
     author: arvind,
     publishedAt: "2026-05-09T07:45:00+05:30",
     readingMinutes: 7,
@@ -232,6 +259,14 @@ export const articles: Article[] = [
       "A review of district appeal files shows how documentation gaps shape access to public health support.",
     category: "Rights and Welfare",
     region: "Maharashtra",
+    geographicScope: "State",
+    topicCategory: "Health",
+    contentDepth: "Investigation",
+    urgency: "Ongoing",
+    editorialVerificationState: "Reviewed",
+    civicIssue: "Health welfare appeals",
+    district: "Pune",
+    coordinates: { lat: 18.5204, lng: 73.8567 },
     author: meera,
     publishedAt: "2026-05-02T10:00:00+05:30",
     readingMinutes: 8,
@@ -338,6 +373,353 @@ export const governanceLogs: GovernanceLog[] = [
 
 export const corrections: Correction[] = articles.flatMap((article) => article.corrections);
 
+export const taxonomy = {
+  geographicScopes: ["World", "India", "State", "City"],
+  topicCategories: [
+    "Governance",
+    "Judiciary",
+    "Education",
+    "Environment",
+    "Economy",
+    "Infrastructure",
+    "Corruption",
+    "Elections",
+    "Health",
+    "Public Welfare"
+  ],
+  contentDepths: ["Pulse Update", "Standard Report", "Investigation", "Evidence Archive"],
+  urgencies: ["Breaking", "Developing", "Ongoing", "Archived"],
+  verificationStates: ["Preliminary", "Reviewed", "Verified", "Disputed"]
+} as const;
+
+export const publicPulseItems: PublicPulseItem[] = [
+  {
+    id: "PP-IND-014",
+    zone: "India",
+    region: "National",
+    category: "Judiciary",
+    headline: "Supreme Court hearing tracker opened for welfare documentation petitions",
+    summary: "Legal desk is monitoring filings that affect identity documents, benefit access, and district appeal procedures.",
+    urgency: "Developing",
+    verificationState: "Reviewed",
+    updatedAt: "2026-05-22T09:20:00+05:30",
+    evidenceCount: 4,
+    desk: "Judiciary Desk"
+  },
+  {
+    id: "PP-DEL-032",
+    zone: "Cities",
+    region: "Delhi governance",
+    category: "Governance",
+    headline: "Municipal procurement records flagged for missing inspection references",
+    summary: "The Delhi Desk has linked school meal payments, vendor acknowledgements, and pending inspection uploads.",
+    urgency: "Ongoing",
+    verificationState: "Reviewed",
+    updatedAt: "2026-05-22T08:35:00+05:30",
+    evidenceCount: 7,
+    linkedArticleSlug: "audit-trail-missing-school-meals",
+    desk: "Delhi Desk"
+  },
+  {
+    id: "PP-KER-011",
+    zone: "States",
+    region: "Kerala infrastructure",
+    category: "Infrastructure",
+    headline: "Coastal road safety review expands before monsoon field checks",
+    summary: "Regional reporters are comparing tender scope, inspection imagery, and district rainfall warnings.",
+    urgency: "Developing",
+    verificationState: "Verified",
+    updatedAt: "2026-05-21T19:05:00+05:30",
+    evidenceCount: 6,
+    linkedArticleSlug: "coastal-road-safety-files",
+    desk: "Kerala Desk"
+  },
+  {
+    id: "PP-NE-006",
+    zone: "States",
+    region: "Northeast civic reporting",
+    category: "Environment",
+    headline: "Flood preparedness documents requested across three districts",
+    summary: "The Northeast Desk is waiting on official response logs before escalating to investigation status.",
+    urgency: "Ongoing",
+    verificationState: "Preliminary",
+    updatedAt: "2026-05-21T16:45:00+05:30",
+    evidenceCount: 2,
+    desk: "Northeast Desk"
+  },
+  {
+    id: "PP-US-004",
+    zone: "World",
+    region: "US politics",
+    category: "US Politics",
+    headline: "Voting administration cases added to comparative democracy watch",
+    summary: "Global desk is tracking court filings and official election administration notices for civic relevance.",
+    urgency: "Ongoing",
+    verificationState: "Reviewed",
+    updatedAt: "2026-05-21T14:10:00+05:30",
+    evidenceCount: 5,
+    desk: "World Desk"
+  },
+  {
+    id: "PP-EU-003",
+    zone: "World",
+    region: "Europe policy",
+    category: "Europe Policy",
+    headline: "Digital public records policy brief marked for archive comparison",
+    summary: "Records desk is extracting clauses on transparency obligations and automated decision disclosure.",
+    urgency: "Archived",
+    verificationState: "Verified",
+    updatedAt: "2026-05-20T20:15:00+05:30",
+    evidenceCount: 8,
+    desk: "World Desk"
+  },
+  {
+    id: "PP-ME-009",
+    zone: "World",
+    region: "Middle East conflict",
+    category: "Middle East Conflict",
+    headline: "Humanitarian access claims held at reviewed status pending source triangulation",
+    summary: "Conflict desk has separated official claims, field testimony, and third-party monitoring records.",
+    urgency: "Developing",
+    verificationState: "Reviewed",
+    updatedAt: "2026-05-22T07:50:00+05:30",
+    evidenceCount: 9,
+    desk: "World Desk"
+  }
+];
+
+export const regionalDesks: RegionalDesk[] = [
+  {
+    slug: "delhi-desk",
+    name: "Delhi Desk",
+    scope: "City",
+    region: "Delhi NCR",
+    lead: "Naina Rahman",
+    pulseCount: 9,
+    activeInvestigations: 3,
+    evidenceReviews: 7,
+    journalists: ["Naina Rahman"],
+    civicIssues: ["Municipal governance", "Education procurement", "Courts"],
+    summary: "Tracks capital governance, public procurement, court-linked civic questions, and ward-level public records."
+  },
+  {
+    slug: "northeast-desk",
+    name: "Northeast Desk",
+    scope: "State",
+    region: "Northeast India",
+    lead: "Regional Review Desk",
+    pulseCount: 6,
+    activeInvestigations: 2,
+    evidenceReviews: 4,
+    journalists: ["Open application queue"],
+    civicIssues: ["Environment", "Border governance", "Flood preparedness"],
+    summary: "A federation-ready desk for district civic reporting, disaster preparedness records, and state accountability."
+  },
+  {
+    slug: "kerala-desk",
+    name: "Kerala Desk",
+    scope: "State",
+    region: "Kerala",
+    lead: "Arvind Menon",
+    pulseCount: 8,
+    activeInvestigations: 2,
+    evidenceReviews: 5,
+    journalists: ["Arvind Menon"],
+    civicIssues: ["Infrastructure", "Climate resilience", "Public works"],
+    summary: "Maintains coastal infrastructure, climate resilience, and public works evidence streams."
+  },
+  {
+    slug: "bengal-desk",
+    name: "Bengal Desk",
+    scope: "State",
+    region: "West Bengal",
+    lead: "Editorial Review Desk",
+    pulseCount: 4,
+    activeInvestigations: 1,
+    evidenceReviews: 3,
+    journalists: ["Application pending"],
+    civicIssues: ["Elections", "Public welfare", "Local governance"],
+    summary: "Preparing structured archives for election administration, welfare delivery, and municipal oversight."
+  },
+  {
+    slug: "maharashtra-desk",
+    name: "Maharashtra Desk",
+    scope: "State",
+    region: "Maharashtra",
+    lead: "Meera Kulkarni",
+    pulseCount: 7,
+    activeInvestigations: 2,
+    evidenceReviews: 6,
+    journalists: ["Meera Kulkarni"],
+    civicIssues: ["Health", "Civil liberties", "Welfare delivery"],
+    summary: "Coordinates health welfare appeals, district records, and public service delivery investigations."
+  }
+];
+
+export const investigationWorkspaces: InvestigationWorkspace[] = [
+  {
+    slug: "school-meal-contracts-repository",
+    title: "School Meal Contracts Repository",
+    status: "Evidence Verification",
+    desk: "Delhi Desk",
+    lead: "Naina Rahman",
+    collaborators: ["Editorial Review Desk", "AAZADI Research Desk"],
+    timeline: [
+      { date: "2026-05-08", event: "Procurement ledger imported", state: "complete" },
+      { date: "2026-05-11", event: "Inspection timestamp comparison finished", state: "complete" },
+      { date: "2026-05-15", event: "Vendor code challenge resolved", state: "active" }
+    ],
+    sourceTracking: [
+      { source: "District procurement portal", protection: "Public record", status: "verified" },
+      { source: "School committee member", protection: "Name withheld until consent", status: "reviewed" }
+    ],
+    evidenceIds: ["EV-DEL-001", "EV-DEL-002", "EV-DEL-003"],
+    discussionThreads: [
+      { title: "Vendor code reconciliation", type: "Evidence challenge", status: "resolved", comments: 6 },
+      { title: "Inspection upload sequence", type: "Editorial review", status: "active", comments: 4 }
+    ],
+    publicationWorkflow: [
+      { step: "Draft", status: "complete" },
+      { step: "Review", status: "complete" },
+      { step: "Evidence Verification", status: "active" },
+      { step: "Editorial Approval", status: "waiting" },
+      { step: "Publish", status: "waiting" },
+      { step: "Corrections Layer", status: "waiting" },
+      { step: "Archive", status: "waiting" }
+    ]
+  },
+  {
+    slug: "coastal-road-safety-repository",
+    title: "Coastal Road Safety Repository",
+    status: "Editorial Approval",
+    desk: "Kerala Desk",
+    lead: "Arvind Menon",
+    collaborators: ["Infrastructure Review Editor"],
+    timeline: [
+      { date: "2026-05-06", event: "Geotagged image set received", state: "complete" },
+      { date: "2026-05-07", event: "Tender annexure matched", state: "complete" },
+      { date: "2026-05-21", event: "Monsoon follow-up assigned", state: "active" }
+    ],
+    sourceTracking: [
+      { source: "Field inspection photographs", protection: "Public field evidence", status: "verified" },
+      { source: "Contractor response", protection: "On-record reply", status: "reviewed" }
+    ],
+    evidenceIds: ["EV-KER-004", "EV-KER-005"],
+    discussionThreads: [
+      { title: "Shoulder erosion terminology", type: "Correction suggestion", status: "published", comments: 3 }
+    ],
+    publicationWorkflow: [
+      { step: "Draft", status: "complete" },
+      { step: "Review", status: "complete" },
+      { step: "Evidence Verification", status: "complete" },
+      { step: "Editorial Approval", status: "active" },
+      { step: "Publish", status: "waiting" },
+      { step: "Corrections Layer", status: "waiting" },
+      { step: "Archive", status: "waiting" }
+    ]
+  }
+];
+
+export const evidenceVaultRecords: EvidenceVaultRecord[] = articles.flatMap((article) =>
+  article.evidence.map((item) => ({
+    ...item,
+    desk: `${article.region} Desk`,
+    articleSlug: article.slug,
+    custodyState:
+      item.verificationState === "verified"
+        ? "Cleared"
+        : item.verificationState === "under_review"
+          ? "Verification review"
+          : "Disputed",
+    officialRecord: item.type === "pdf" || item.type === "external_link"
+  }))
+);
+
+export const governanceProposals: GovernanceProposal[] = [
+  {
+    id: "PROP-041",
+    title: "Adopt mandatory taxonomy for all public pulse and article submissions",
+    proposal:
+      "Require geographic scope, topic category, content depth, urgency, and verification state before any civic update can enter publication review.",
+    constitutionalReference: "Article II: Evidence before distribution",
+    evidence: ["Editorial workflow audit", "Search API quality memo", "Federation readiness note"],
+    discussionCount: 11,
+    votingRecord: { approve: 8, reject: 0, abstain: 1 },
+    finalOutcome: "Voting closes after the Delhi and Kerala desks complete implementation review.",
+    status: "Voting"
+  },
+  {
+    id: "PROP-040",
+    title: "Appeal standard for unsupported personal allegations",
+    proposal:
+      "Create a visible appeal path for moderated public discussion entries that name private persons without documentary support.",
+    constitutionalReference: "Article IV: Public dignity and correction rights",
+    evidence: ["Moderation log GOV-219", "Discussion structure policy", "Appeal retention memo"],
+    discussionCount: 7,
+    votingRecord: { approve: 6, reject: 1, abstain: 2 },
+    finalOutcome: "Resolved with appeal link preservation and public summary requirement.",
+    status: "Resolved"
+  }
+];
+
+export const civicMapRegions: CivicMapRegion[] = [
+  {
+    id: "MAP-DEL",
+    name: "Delhi NCR",
+    scope: "City",
+    lat: 28.6139,
+    lng: 77.209,
+    issue: "Public Welfare",
+    pulseCount: 9,
+    investigationCount: 3,
+    verificationState: "Reviewed"
+  },
+  {
+    id: "MAP-KER",
+    name: "Kerala",
+    scope: "State",
+    lat: 10.8505,
+    lng: 76.2711,
+    issue: "Infrastructure",
+    pulseCount: 8,
+    investigationCount: 2,
+    verificationState: "Verified"
+  },
+  {
+    id: "MAP-NE",
+    name: "Northeast India",
+    scope: "State",
+    lat: 26.2006,
+    lng: 92.9376,
+    issue: "Environment",
+    pulseCount: 6,
+    investigationCount: 2,
+    verificationState: "Preliminary"
+  },
+  {
+    id: "MAP-MH",
+    name: "Maharashtra",
+    scope: "State",
+    lat: 19.7515,
+    lng: 75.7139,
+    issue: "Health",
+    pulseCount: 7,
+    investigationCount: 2,
+    verificationState: "Reviewed"
+  },
+  {
+    id: "MAP-WB",
+    name: "West Bengal",
+    scope: "State",
+    lat: 22.9868,
+    lng: 87.855,
+    issue: "Elections",
+    pulseCount: 4,
+    investigationCount: 1,
+    verificationState: "Preliminary"
+  }
+];
+
 export function getArticle(slug: string) {
   return articles.find((article) => article.slug === slug);
 }
@@ -354,4 +736,8 @@ export function getArticlesByRegion(region: string) {
 export function getArticlesByCategory(category: string) {
   const normalized = decodeURIComponent(category).toLowerCase().replaceAll("-", " ");
   return articles.filter((article) => article.category.toLowerCase() === normalized);
+}
+
+export function getInvestigationWorkspace(slug: string) {
+  return investigationWorkspaces.find((workspace) => workspace.slug === slug);
 }

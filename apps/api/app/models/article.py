@@ -6,7 +6,15 @@ from sqlalchemy.dialects.postgresql import JSONB, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
-from app.models.enums import ArticleStatus, VerificationState
+from app.models.enums import (
+  ArticleStatus,
+  ContentDepth,
+  EditorialVerificationState,
+  GeographicScope,
+  TopicCategory,
+  Urgency,
+  VerificationState,
+)
 
 
 class Article(Base):
@@ -18,6 +26,23 @@ class Article(Base):
   subtitle: Mapped[str] = mapped_column(String(420), nullable=False)
   category: Mapped[str] = mapped_column(String(120), index=True, nullable=False)
   region: Mapped[str] = mapped_column(String(120), index=True, nullable=False)
+  geographic_scope: Mapped[GeographicScope] = mapped_column(
+    Enum(GeographicScope, name="geographic_scope"), index=True, nullable=False
+  )
+  topic_category: Mapped[TopicCategory] = mapped_column(
+    Enum(TopicCategory, name="topic_category"), index=True, nullable=False
+  )
+  content_depth: Mapped[ContentDepth] = mapped_column(
+    Enum(ContentDepth, name="content_depth"), index=True, nullable=False
+  )
+  urgency: Mapped[Urgency] = mapped_column(Enum(Urgency, name="urgency"), index=True, nullable=False)
+  editorial_verification_state: Mapped[EditorialVerificationState] = mapped_column(
+    Enum(EditorialVerificationState, name="editorial_verification_state"), index=True, nullable=False
+  )
+  civic_issue: Mapped[str] = mapped_column(String(180), index=True, nullable=False)
+  district: Mapped[str | None] = mapped_column(String(160), index=True)
+  latitude: Mapped[str | None] = mapped_column(String(40))
+  longitude: Mapped[str | None] = mapped_column(String(40))
   author_id: Mapped[UUID] = mapped_column(PG_UUID(as_uuid=True), ForeignKey("journalist_profiles.id", ondelete="RESTRICT"), index=True)
   status: Mapped[ArticleStatus] = mapped_column(Enum(ArticleStatus, name="article_status"), default=ArticleStatus.draft, nullable=False)
   body_markdown: Mapped[str] = mapped_column(Text, nullable=False)

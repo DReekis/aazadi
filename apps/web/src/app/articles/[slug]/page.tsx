@@ -72,6 +72,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 {article.revisions.length} revisions
               </span>
             </div>
+            <dl className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {[
+                ["Scope", article.geographicScope],
+                ["Topic", article.topicCategory],
+                ["Depth", article.contentDepth],
+                ["Urgency", article.urgency],
+                ["Verification", article.editorialVerificationState]
+              ].map(([label, value]) => (
+                <div className="soft-card p-3" key={label}>
+                  <dt className="text-[0.68rem] font-black uppercase tracking-[0.08em] text-maroon">{label}</dt>
+                  <dd className="mt-1 text-sm font-bold text-obsidian">{value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
           <IntegrityPanel article={article} />
         </div>

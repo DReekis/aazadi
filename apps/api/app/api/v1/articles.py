@@ -57,6 +57,15 @@ def create_article(
     subtitle=payload.subtitle,
     category=payload.category,
     region=payload.region,
+    geographic_scope=payload.geographic_scope,
+    topic_category=payload.topic_category,
+    content_depth=payload.content_depth,
+    urgency=payload.urgency,
+    editorial_verification_state=payload.editorial_verification_state,
+    civic_issue=payload.civic_issue,
+    district=payload.district,
+    latitude=payload.latitude,
+    longitude=payload.longitude,
     author_id=payload.author_id,
     body_markdown=payload.body_markdown,
     reading_minutes=estimate_reading_minutes(payload.body_markdown),
@@ -109,6 +118,24 @@ def update_article(
     article.category = payload.category
   if payload.region is not None:
     article.region = payload.region
+  if payload.geographic_scope is not None:
+    article.geographic_scope = payload.geographic_scope
+  if payload.topic_category is not None:
+    article.topic_category = payload.topic_category
+  if payload.content_depth is not None:
+    article.content_depth = payload.content_depth
+  if payload.urgency is not None:
+    article.urgency = payload.urgency
+  if payload.editorial_verification_state is not None:
+    article.editorial_verification_state = payload.editorial_verification_state
+  if payload.civic_issue is not None:
+    article.civic_issue = payload.civic_issue
+  if payload.district is not None:
+    article.district = payload.district
+  if payload.latitude is not None:
+    article.latitude = payload.latitude
+  if payload.longitude is not None:
+    article.longitude = payload.longitude
   if payload.body_markdown is not None:
     article.body_markdown = payload.body_markdown
 

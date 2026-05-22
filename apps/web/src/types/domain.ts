@@ -1,5 +1,20 @@
 export type EvidenceType = "image" | "pdf" | "external_link" | "transcript";
 export type VerificationState = "verified" | "under_review" | "challenged" | "rejected";
+export type GeographicScope = "World" | "India" | "State" | "City";
+export type TopicCategory =
+  | "Governance"
+  | "Judiciary"
+  | "Education"
+  | "Environment"
+  | "Economy"
+  | "Infrastructure"
+  | "Corruption"
+  | "Elections"
+  | "Health"
+  | "Public Welfare";
+export type ContentDepth = "Pulse Update" | "Standard Report" | "Investigation" | "Evidence Archive";
+export type Urgency = "Breaking" | "Developing" | "Ongoing" | "Archived";
+export type EditorialVerificationState = "Preliminary" | "Reviewed" | "Verified" | "Disputed";
 export type CommentType =
   | "correction_suggestion"
   | "evidence_challenge"
@@ -64,6 +79,17 @@ export type Article = {
   subtitle: string;
   category: string;
   region: string;
+  geographicScope: GeographicScope;
+  topicCategory: TopicCategory;
+  contentDepth: ContentDepth;
+  urgency: Urgency;
+  editorialVerificationState: EditorialVerificationState;
+  civicIssue: string;
+  district?: string;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
   author: Journalist;
   publishedAt: string;
   readingMinutes: number;
@@ -93,4 +119,84 @@ export type GovernanceLog = {
   actor: string;
   publicSummary: string;
   outcome: string;
+};
+
+export type PulseZone = "India" | "World" | "States" | "Cities";
+
+export type PublicPulseItem = {
+  id: string;
+  zone: PulseZone;
+  region: string;
+  category: TopicCategory | "US Politics" | "Europe Policy" | "Middle East Conflict";
+  headline: string;
+  summary: string;
+  urgency: Urgency;
+  verificationState: EditorialVerificationState;
+  updatedAt: string;
+  evidenceCount: number;
+  linkedArticleSlug?: string;
+  desk: string;
+};
+
+export type RegionalDesk = {
+  slug: string;
+  name: string;
+  scope: GeographicScope;
+  region: string;
+  lead: string;
+  pulseCount: number;
+  activeInvestigations: number;
+  evidenceReviews: number;
+  journalists: string[];
+  civicIssues: string[];
+  summary: string;
+};
+
+export type InvestigationWorkspace = {
+  slug: string;
+  title: string;
+  status: "Draft" | "Review" | "Evidence Verification" | "Editorial Approval" | "Publish" | "Corrections Layer" | "Archive";
+  desk: string;
+  lead: string;
+  collaborators: string[];
+  timeline: Array<{ date: string; event: string; state: string }>;
+  sourceTracking: Array<{ source: string; protection: string; status: string }>;
+  evidenceIds: string[];
+  discussionThreads: Array<{ title: string; type: string; status: string; comments: number }>;
+  publicationWorkflow: Array<{ step: string; status: "complete" | "active" | "blocked" | "waiting" }>;
+};
+
+export type EvidenceVaultRecord = EvidenceItem & {
+  desk: string;
+  articleSlug?: string;
+  custodyState: "Received" | "Hash recorded" | "Verification review" | "Cleared" | "Disputed";
+  officialRecord: boolean;
+};
+
+export type GovernanceProposal = {
+  id: string;
+  title: string;
+  proposal: string;
+  constitutionalReference: string;
+  evidence: string[];
+  discussionCount: number;
+  votingRecord: {
+    approve: number;
+    reject: number;
+    abstain: number;
+  };
+  finalOutcome: string;
+  status: "Open" | "Voting" | "Resolved" | "Appeal";
+};
+
+export type CivicMapRegion = {
+  id: string;
+  name: string;
+  scope: GeographicScope;
+  lat: number;
+  lng: number;
+  issue: TopicCategory;
+  pulseCount: number;
+  investigationCount: number;
+  verificationState: EditorialVerificationState;
 };

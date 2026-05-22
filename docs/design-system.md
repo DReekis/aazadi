@@ -22,6 +22,8 @@ AAZADI uses a geometric institutional monogram: a restrained `A` inside an obsid
 ## Components
 
 - `ArticleCard`: investigation previews with integrity indicators.
+- `PublicPulse`: structured civic awareness layer for India, world, states, cities, and issue categories.
+- `CivicMapPanel`: lightweight geographic civic awareness surface.
 - `EvidenceLedger`: visible evidence records with uploader, type, timestamp, and verification state.
 - `IntegrityPanel`: sticky article trust sidebar.
 - `GovernanceCard`: public institutional decision records.
@@ -33,6 +35,8 @@ AAZADI uses a geometric institutional monogram: a restrained `A` inside an obsid
 
 - No infinite feeds.
 - No popularity or virality mechanics.
+- Pulse records are classified, curated, and finite.
+- Internal surfaces use Newsroom, Civic Desk, Public Record System, Evidence Vault, and Governance Chamber language.
 - Subtle hover states only.
 - Cards are used for repeated records and tool panels, with radius capped at 8px.
 - Mobile navigation remains lightweight and scrollable rather than JS-heavy.

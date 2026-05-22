@@ -8,6 +8,13 @@ This repository contains a production-oriented V1 modular monolith:
 - `apps/api`: FastAPI, PostgreSQL, SQLAlchemy, JWT auth, audit-ready REST API.
 - `docs`: architecture, API, deployment, and product governance notes.
 
+The current product surface includes:
+
+- Public Pulse: structured civic awareness across India, world, states, cities, and issue categories.
+- Civic Map: geographic public-reality browsing by region, district, issue, and verification state.
+- The Newsroom: internal constitutional newsroom operating system.
+- Evidence Vault, Governance Chamber, Regional Desks, Editorial Review Queue, Reputation Center, and Constitutional Records System.
+
 ## Quick Start
 
 ```bash

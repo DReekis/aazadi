@@ -20,6 +20,14 @@ Base path: `/api/v1`
 - `POST /articles/{article_id}/publish`
 - `GET /articles/{article_id}/revisions`
 
+Article creation requires:
+
+- `geographic_scope`: `world`, `india`, `state`, `city`
+- `topic_category`: `governance`, `judiciary`, `education`, `environment`, `economy`, `infrastructure`, `corruption`, `elections`, `health`, `public_welfare`
+- `content_depth`: `pulse_update`, `standard_report`, `investigation`, `evidence_archive`
+- `urgency`: `breaking`, `developing`, `ongoing`, `archived`
+- `editorial_verification_state`: `preliminary`, `reviewed`, `verified`, `disputed`
+
 ## Evidence
 
 - `POST /evidence`
@@ -52,5 +60,17 @@ Base path: `/api/v1`
 ## Search
 
 - `GET /search?q=...`
+
+## Newsroom OS
+
+- `GET /newsroom/pulse`
+- `POST /newsroom/pulse`
+- `GET /newsroom/investigations`
+- `POST /newsroom/investigations`
+- `GET /newsroom/investigations/{workspace_id}`
+- `GET /newsroom/civic-map`
+- `POST /newsroom/civic-map`
+- `GET /newsroom/governance-proposals`
+- `POST /newsroom/governance-proposals`
 
 Public API monetization can be layered later through `api_keys`, scoped keys, and quota middleware without reshaping the resource model.
