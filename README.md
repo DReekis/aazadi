@@ -56,3 +56,4 @@ docker compose up --build
 ## Architecture
 
 AAZADI V1 is intentionally centralized, fast, and practical. The module boundaries, storage abstraction, integrity metadata, and API design leave room for future federation, decentralized storage, and public civic information infrastructure without forcing that complexity into the first release.
+
